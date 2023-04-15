@@ -21,9 +21,32 @@ To make 'lxmon' work, the followings steps are needed:
    * crontab -e
    * @reboot sleep 45 && /path_to_lxmon/lxmon &
 
-The above procedure will start 'lxmon' after any reboot of the system.
+The above procedure will start 'lxmon' 45s after any reboot of the system.
 
 'lxmon' writes its output to the console (only visible if running in terminal), 
 a daily logfile 'lxmon_YYYMMDD.log' and a settings file 'lxmon.ini'.
+## Build yourself
+'lxmon' uses Qt features, therefore parts of the Qt framework are needed.
+Choose at least one a) or b) of the following build enviromnents. 
 
+a) cross compile environment
+ * follow https://github.com/abhiTronix/raspberry-pi-cross-compilers/blob/master/QT_build_instructions.md
+ * download & unzip 'lxmon' repository
+ * build & run
 
+b) raspberry
+ * sudo apt-get install qt5-default
+ * sudo apt-get install qtcreator
+ * sudo apt-get install libqt5serialport5
+ * sudo apt-get install libqt5serialport5-dev
+ * configure QtCreator
+ * download & unzip 'lxmon' repository
+ * simplify lxmon.pro file
+ QT -= gui
+ CONFIG += c++17 console
+ CONFIG -= app_bundle
+ SOURCES += main.cpp
+ HEADERS += logger.h
+ * uncheck checkbox Project/Run Setting/ 'Run in terminal' to be able to use debugger
+ * build & run
+ 
